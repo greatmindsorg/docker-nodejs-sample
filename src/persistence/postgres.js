@@ -21,8 +21,8 @@ async function init() {
     const password = PASSWORD_FILE ? fs.readFileSync(PASSWORD_FILE, 'utf8') : PASSWORD;
     const database = DB_FILE ? fs.readFileSync(DB_FILE) : DB;
 
-    await waitPort({ 
-        host, 
+    await waitPort({
+        host,
         port: 5432,
         timeout: 10000,
         waitForDns: true,
@@ -67,7 +67,7 @@ async function teardown() {
     console.error('Unable to end client:', err);
   });
 }
-  
+
 // Get one item by id from the table
 async function getItem(id) {
     return client.query('SELECT * FROM todo_items WHERE id = $1', [id]).then(res => {
@@ -76,7 +76,7 @@ async function getItem(id) {
       console.error('Unable to get item:', err);
     });
 }
-  
+
 // Store one item in the table
 async function storeItem(item) {
     return client.query('INSERT INTO todo_items(id, name, completed) VALUES($1, $2, $3)', [item.id, item.name, item.completed]).then(() => {
@@ -85,7 +85,7 @@ async function storeItem(item) {
       console.error('Unable to store item:', err);
     });
 }
-  
+
 // Update one item by id in the table
 async function updateItem(id, item) {
     return client.query('UPDATE todo_items SET name = $1, completed = $2 WHERE id = $3', [item.name, item.completed, id]).then(() => {
@@ -94,7 +94,7 @@ async function updateItem(id, item) {
       console.error('Unable to update item:', err);
     });
 }
-  
+
 // Remove one item by id from the table
 async function removeItem(id) {
     return client.query('DELETE FROM todo_items WHERE id = $1', [id]).then(() => {
@@ -103,7 +103,7 @@ async function removeItem(id) {
       console.error('Unable to remove item:', err);
     });
 }
-  
+
 module.exports = {
   init,
   teardown,
