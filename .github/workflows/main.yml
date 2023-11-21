@@ -2,12 +2,12 @@
   name: "Dev Application Deployment"
 
   on:
-    # pull_request:
-    #   paths:
-    #     - '/**'
+    pull_request:
+      paths:
+        - '/**'
     push:
       branches:
-     #   - main
+        - main
         - dev-21
       paths:
         - '/**'
@@ -28,7 +28,6 @@
   jobs:
     build:
       runs-on: ubuntu-latest
-
       steps:
         - name: Checkout repository
           uses: actions/checkout@v2
@@ -50,10 +49,13 @@
           run: docker tag sample:latest 700429856186.dkr.ecr.us-east-2.amazonaws.com/sample:latest
 
         - name: Push Docker image to ECR
-          run: docker push 00429856186.dkr.ecr.us-east-2.amazonaws.com/sample:latest
+          run: docker push 700429856186.dkr.ecr.us-east-2.amazonaws.com/sample:latest
 
     terraform:
       runs-on: ubuntu-latest
+      defaults:
+        run:
+          working-directory: /ecs-service/sample
       steps:
         - uses: actions/checkout@v4
         - uses: hashicorp/setup-terraform@v2
