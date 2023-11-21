@@ -2,12 +2,12 @@
   name: "Dev Application Deployment"
 
   on:
-    pull_request:
-      paths:
-        - '/**'
+    # pull_request:
+    #   paths:
+    #     - '/**'
     push:
       branches:
-        - main
+     #   - main
         - dev-21
       paths:
         - '/**'
