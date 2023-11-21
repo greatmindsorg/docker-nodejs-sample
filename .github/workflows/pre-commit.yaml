@@ -3,6 +3,7 @@ on:
   push:
     branches-ignore:
       - main
+      - dev-21
 
 jobs:
   pre_commit:
